@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": ["es2019"],
+    "target": "es2019",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "incremental": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "noImplicitAny": true
+  },
+  "exclude": [
+    "node_modules",
+    "test",
+    "coverage",
+    "cache",
+    "dist",
+    "**/*spec.ts"
+  ]
+}
