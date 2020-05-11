@@ -76,6 +76,17 @@ export interface IExif {
   date_time?: string;
 }
 
+export interface IResourceUploadLink {
+  // Идентификатор операции загрузки файла
+  operation_id: string;
+  // URL
+  href: string;
+  // HTTP-метод
+  method: string;
+  // Признак шаблонизированного URL
+  templated?: boolean;
+}
+
 export interface ICommentIds {
   // Идентификатор комментариев для приватных ресурсов.
   private_resource?: string;
@@ -193,13 +204,11 @@ export interface IImageMetadata {
   height?: number;
 }
 
-export interface ILink {
-  // URL
-  href: string;
-  // HTTP-метод
-  method: string;
-  // Признак шаблонизированного URL
-  templated?: boolean;
+export interface ILastUploadedResourceList {
+  // Элементы списка
+  items: IResource[];
+  // Количество элементов на странице
+  limit?: number;
 }
 
 export interface IUploadResource {
@@ -230,11 +239,13 @@ export interface IDelta {
   revision: number;
 }
 
-export interface ILastUploadedResourceList {
-  // Элементы списка
-  items: IResource[];
-  // Количество элементов на странице
-  limit?: number;
+export interface ILink {
+  // URL
+  href: string;
+  // HTTP-метод
+  method: string;
+  // Признак шаблонизированного URL
+  templated?: boolean;
 }
 
 export interface IFilesResourceList {
@@ -244,17 +255,6 @@ export interface IFilesResourceList {
   limit?: number;
   // Смещение от начала списка
   offset?: number;
-}
-
-export interface IResourceUploadLink {
-  // Идентификатор операции загрузки файла
-  operation_id: string;
-  // URL
-  href: string;
-  // HTTP-метод
-  method: string;
-  // Признак шаблонизированного URL
-  templated?: boolean;
 }
 
 export interface IResource {
@@ -590,7 +590,7 @@ export interface IGetDiskOptions extends IOperationOptions {
 }
 
 export interface IGetResourceOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Путь к ресурсу.
     path: string;
     // Список возвращаемых атрибутов.
@@ -609,7 +609,7 @@ export interface IGetResourceOptions extends IOperationOptions {
 }
 
 export interface ICreateResourceOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Путь к создаваемой папке.
     path: string;
     // Список возвращаемых атрибутов.
@@ -618,7 +618,7 @@ export interface ICreateResourceOptions extends IOperationOptions {
 }
 
 export interface IDeleteResourceOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Путь к файлу или папке.
     path: string;
     // Список возвращаемых атрибутов.
@@ -633,11 +633,11 @@ export interface IDeleteResourceOptions extends IOperationOptions {
 }
 
 export interface IUpdateResourceOptions extends IOperationOptions {
-  body?: {
+  body: {
     body: IResourcePatch;
   };
 
-  query?: {
+  query: {
     // Путь к обновляемому ресурсу.
     path: string;
     // Список возвращаемых атрибутов.
@@ -646,7 +646,7 @@ export interface IUpdateResourceOptions extends IOperationOptions {
 }
 
 export interface ICopyResourceOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Путь к копируемому ресурсу.
     from: string;
     // Путь к создаваемому ресурсу.
@@ -661,7 +661,7 @@ export interface ICopyResourceOptions extends IOperationOptions {
 }
 
 export interface IGetResourceDownloadLinkOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Путь к ресурсу.
     path: string;
     // Список возвращаемых атрибутов.
@@ -704,7 +704,7 @@ export interface IGetLastUploadedFilesListOptions extends IOperationOptions {
 }
 
 export interface IMoveResourceOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Путь к перемещаемому ресурсу.
     from: string;
     // Путь к создаваемому ресурсу.
@@ -736,7 +736,7 @@ export interface IListPublicResourcesOptions extends IOperationOptions {
 }
 
 export interface IPublishResourceOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Путь к публикуемому ресурсу.
     path: string;
     // Список возвращаемых атрибутов.
@@ -745,7 +745,7 @@ export interface IPublishResourceOptions extends IOperationOptions {
 }
 
 export interface IUnpublishResourceOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Путь к ресурсу.
     path: string;
     // Список возвращаемых атрибутов.
@@ -754,7 +754,7 @@ export interface IUnpublishResourceOptions extends IOperationOptions {
 }
 
 export interface IUploadExternalResourceOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Путь, куда будет помещён ресурс.
     path: string;
     // URL внешнего ресурса, который следует загрузить.
@@ -767,7 +767,7 @@ export interface IUploadExternalResourceOptions extends IOperationOptions {
 }
 
 export interface IGetResourceUploadLinkOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Путь к загружаемому файлу на Диске.
     path: string;
     // Список возвращаемых атрибутов.
@@ -778,7 +778,7 @@ export interface IGetResourceUploadLinkOptions extends IOperationOptions {
 }
 
 export interface IGetPublicResourceOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Ключ или публичный URL ресурса.
     public_key: string;
     // Список возвращаемых атрибутов.
@@ -799,7 +799,7 @@ export interface IGetPublicResourceOptions extends IOperationOptions {
 }
 
 export interface IGetPublicResourceDownloadLinkOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Ключ или публичный URL ресурса.
     public_key: string;
     // Список возвращаемых атрибутов.
@@ -810,7 +810,7 @@ export interface IGetPublicResourceDownloadLinkOptions extends IOperationOptions
 }
 
 export interface ISaveToDiskPublicResourceOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Ключ или публичный URL ресурса.
     public_key: string;
     // Список возвращаемых атрибутов.
@@ -838,7 +838,7 @@ export interface IClearTrashOptions extends IOperationOptions {
 }
 
 export interface IGetTrashResourceOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Путь к ресурсу в Корзине.
     path: string;
     // Список возвращаемых атрибутов.
@@ -857,7 +857,7 @@ export interface IGetTrashResourceOptions extends IOperationOptions {
 }
 
 export interface IRestoreFromTrashOptions extends IOperationOptions {
-  query?: {
+  query: {
     // Путь к ресурсу в Корзине.
     path: string;
     // Список возвращаемых атрибутов.
@@ -876,7 +876,7 @@ export interface IGetOperationStatusOptions extends IOperationOptions {
     // Список возвращаемых атрибутов.
     fields?: string;
   };
-  params?: {
+  params: {
     // Идентификатор операции.
     operation_id: string;
   };
