@@ -3,7 +3,7 @@
 Example:
 
 ```js
-import { YDisk } from "./src";
+import { YDisk } from "@plasticut/yandex-disk";
 
 const token = 'your oauth token';
 
