@@ -14,7 +14,7 @@ async function main() {
 
   if (resource._embedded) {
     for (const item of resource._embedded.items) {
-      console.dir(item));
+      console.dir(item);
     }
   }
 }
